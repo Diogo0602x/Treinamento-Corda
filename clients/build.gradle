@@ -22,11 +22,13 @@ dependencies {
     compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j_version}"
     compile "org.apache.logging.log4j:log4j-web:${log4j_version}"
     compile "org.slf4j:jul-to-slf4j:$slf4j_version"
+
+    compile group: 'org.apache.commons', name: 'commons-compress', version: '1.21'
 }
 
 
 springBoot {
-    mainClassName = "net.corda.samples.example.webserver.ServerKt"
+    mainClassName = "br.com.seven.training.ServerKt"
 }
 
 /* The Client is the communication channel between the external and the node. This task will help you immediately
@@ -44,12 +46,12 @@ task runTestClient(type: JavaExec, dependsOn: assemble) {
  */
 task runPartyAServer(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'net.corda.samples.example.webserver.ServerKt'
+    main = 'br.com.seven.training.ServerKt'
     args '--server.port=50005', '--config.rpc.host=localhost', '--config.rpc.port=10006', '--config.rpc.username=user1', '--config.rpc.password=test'
 }
 
 task runPartyBServer(type: JavaExec, dependsOn: assemble) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'net.corda.samples.example.webserver.ServerKt'
+    main = 'br.com.seven.training.ServerKt'
     args '--server.port=50006', '--config.rpc.host=localhost', '--config.rpc.port=10009', '--config.rpc.username=user1', '--config.rpc.password=test'
 }
